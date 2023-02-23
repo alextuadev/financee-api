@@ -46,6 +46,12 @@ def message():
     return "Hello Financee API"
 
 
+
+@app.get('/transactions', tags=['auth'], dependencies=[Depends(JWTBearer())])
+def get_transactions():
+    return "Hello Financee API"
+
+
 @app.post('/login', tags=['auth'])
 def login(user: User):
     if user.email == "admin@gmail.com" and user.password == "admin":
