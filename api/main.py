@@ -3,6 +3,8 @@ from config.jwt_manager import create_token, validate_token
 from fastapi.responses import JSONResponse
 from config.database import Session, engine, Base
 from models.user import User as UserModel
+from models.category import Category
+from models.transaction import Transaction
 from pydantic import BaseModel, Field
 from fastapi.security import HTTPBearer
 
