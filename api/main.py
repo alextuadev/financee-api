@@ -1,28 +1,21 @@
 from fastapi import Depends, FastAPI, Body, HTTPException, Path, Query, Request
-from config.jwt_manager import create_token, validate_token
+from utils.jwt_manager import create_token
 from fastapi.responses import JSONResponse
 from config.database import Session, engine, Base
 from models.user import User as UserModel
 from models.category import Category
 from models.transaction import Transaction
 from pydantic import BaseModel, Field
-from fastapi.security import HTTPBearer
+from middlewares.jwt_auth import JWTBearer
+from middlewares.error_handler import ErrorHandler
 
 
 app = FastAPI()
 app.version = "0.0.2"
 app.title = "Finance API"
+app.add_middleware(ErrorHandler)
 
 Base.metadata.create_all(bind=engine)
-
-
-class JWTBearer(HTTPBearer):
-    async def __call__(self, request: Request):
-        auth = await super().__call__(request)
-        data = validate_token(auth.credentials)
-        if data['email'] != "admin@gmail.com":
-            raise HTTPException(status_code=403, detail="Credenciales son invalidas")
-
 
 class User(BaseModel):
     name:str = Field(min_length=5, max_length=150)
