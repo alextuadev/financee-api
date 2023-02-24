@@ -4,11 +4,9 @@ from config.database import Session
 from services.transaction import TransactionService
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
-from fastapi import APIRouter
 from fastapi import Depends, Path, Query
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel, Field
-from typing import Optional, List
+from typing import  List
 from config.database import Session
 from models.transaction import Transaction as TransactionModel
 from services.transaction import TransactionService
