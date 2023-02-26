@@ -14,10 +14,12 @@ services:
     depends_on:
       - db
     environment:
-      MYSQL_HOST: db
-      MYSQL_USER: root
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: p4ssw0rd
       MYSQL_DB: finance_db
+      SECRET_KEY: ${SECRET_KEY}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES}
 
   db:
     image: mysql:8.0

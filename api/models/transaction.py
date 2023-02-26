@@ -2,7 +2,8 @@ from sqlalchemy import Column, ForeignKey, Integer, String, Float, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from config.database import Base
-
+from models.user import User
+from models.category import Category
 
 class Transaction(Base):
     __tablename__ = "transactions"
@@ -14,5 +15,5 @@ class Transaction(Base):
     description = Column(String(500))
     amount = Column(Float)
 
-    user = relationship("User", back_populates="transactions")
-    category = relationship("Category", back_populates="transactions")
+    user = relationship(User, back_populates="transactions")
+    category = relationship(Category, back_populates="transactions")
