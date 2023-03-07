@@ -1,5 +1,5 @@
-
 from fastapi import APIRouter
+from fastapi import Depends, HTTPException, Path, Query, Request
 from config.database import Session
 from services.transaction import TransactionService
 from fastapi.responses import JSONResponse
@@ -11,10 +11,14 @@ from config.database import Session
 from models.transaction import Transaction as TransactionModel
 from services.transaction import TransactionService
 from schemas.transaction import Transaction
+from fastapi.security import HTTPBearer
+from middlewares.jwt_auth import JWTBearer
+
 
 transaction_router = APIRouter()
 
-@transaction_router.get('/transactions', tags=['transactions'])
+
+@transaction_router.get('/transactions', tags=['transactions'], dependencies=[Depends(JWTBearer())])
 def get_transactions():
     db = Session()
     result = TransactionService(db).get_transactions()

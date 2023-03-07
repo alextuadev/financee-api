@@ -20,3 +20,14 @@ class User(BaseModel):
                 "active": True
             }
         }
+
+class UserLogin(BaseModel):
+    email:str = Field(min_length=5, max_length=150)
+    password:str = Field(min_length=8, max_length=150)
+    class Config:
+        schema_extra = {
+            "example": {
+                "email": "email@email.com",
+                "password": "123456789"       
+            }
+        }

@@ -41,7 +41,7 @@ def decode_access_token(token: str):
 def verify_access_token(token: str):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username = payload.get("sub")
+        username = payload.get("username")
         if username is None:
             raise HTTPException(status_code=401, detail="Invalid token")
     except JWTError:
