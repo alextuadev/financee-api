@@ -3,3 +3,6 @@ Run APP
 
 RUN on
 ```0.0.0.0```
+
+
+## Functionalities:
