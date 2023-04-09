@@ -14,21 +14,25 @@ services:
     depends_on:
       - db
     environment:
-      MYSQL_HOST: ${MYSQL_HOST}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: p4ssw0rd
-      MYSQL_DB: finance_db
+      POSTGRES_HOST: db
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
       SECRET_KEY: ${SECRET_KEY}
       ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES}
 
   db:
-    image: mysql:8.0
-    container_name: finance-mysql
+    image: postgres:latest
+    container_name: finance-postgresql
     restart: always
     ports:
-      - "3306:3306"
+      - "5432:5432"
     environment:
-      MYSQL_ROOT_PASSWORD: p4ssw0rd
-      MYSQL_DATABASE: finance_db
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
-      - ./docker/mysql_data:/var/lib/mysql
+      - pgdata:/var/lib/postgresql/data
+      
+volumes:
+  pgdata:

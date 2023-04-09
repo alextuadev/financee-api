@@ -1,19 +1,20 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm.session import sessionmaker
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import sessionmaker
 
 import os
 
 
-MYSQL_USER=os.environ.get("MYSQL_USER")
-MYSQL_PASSWORD=os.environ.get("MYSQL_PASSWORD")
-MYSQL_HOST=os.environ.get("MYSQL_HOST")
-MYSQL_DATABASE=os.environ.get("MYSQL_DB")
+POSTGRES_USER=os.environ.get("POSTGRES_USER")
+POSTGRES_PASSWORD=os.environ.get("POSTGRES_PASSWORD")
+POSTGRES_HOST=os.environ.get("POSTGRES_HOST")
+POSTGRES_DATABASE=os.environ.get("POSTGRES_DB")
 
-DATABASE_URL = f"mysql+mysqlconnector://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}/{MYSQL_DATABASE}"
+DATABASE_URL = f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}/{POSTGRES_DATABASE}"
 
-engine = create_engine(DATABASE_URL)
+engine = create_async_engine(DATABASE_URL)
 
-Session = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+async_session = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
 
 Base = declarative_base()

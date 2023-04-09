@@ -1,13 +1,12 @@
 from fastapi import APIRouter
 from fastapi import Depends, HTTPException, Path, Query, Request
-from config.database import Session
+# from config.database import Session
 from services.transaction import TransactionService
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from fastapi import Depends, Path, Query
 from fastapi.responses import JSONResponse
 from typing import  List
-from config.database import Session
 from models.transaction import Transaction as TransactionModel
 from services.transaction import TransactionService
 from schemas.transaction import Transaction
