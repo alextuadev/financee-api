@@ -3,7 +3,6 @@ from sqlalchemy import Column, Integer, String, Boolean, DateTime
 from sqlalchemy.orm import relationship
 
 class User(Base):
-
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True, index=True)
@@ -14,3 +13,4 @@ class User(Base):
     active =Column(Boolean, default=True)
 
     transactions = relationship("Transaction", back_populates="user")
+    bank_accounts = relationship("BankAccount", back_populates="user")

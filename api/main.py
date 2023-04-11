@@ -4,14 +4,16 @@ from middlewares.error_handler import ErrorHandler
 from routers.transaction import transaction_router
 from routers.bank import bank_router
 from routers.auth import auth_router
+from routers.bank_account import bank_account_router
 
 
 app = FastAPI()
-app.version = "0.0.4"
+app.version = "0.0.5"
 app.title = "Financee API"
 app.add_middleware(ErrorHandler)
 app.include_router(auth_router, prefix="/api")
 app.include_router(bank_router, prefix="/api")
+app.include_router(bank_account_router, prefix="/api")
 # app.include_router(transaction_router, prefix="/api")
 
 async def create_tables():

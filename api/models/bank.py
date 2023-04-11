@@ -9,3 +9,5 @@ class Bank(Base):
     bank_name = Column(String)
     icon = Column(String(180))
     is_active = Column(Boolean, default=True)
+
+    bank_accounts = relationship("BankAccount", back_populates="bank")
