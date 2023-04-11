@@ -11,7 +11,6 @@ from jose import jwt
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy import select
 
-
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 JWT_SECRET=os.environ.get("SECRET_KEY", "")

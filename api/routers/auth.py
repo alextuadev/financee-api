@@ -11,7 +11,6 @@ auth_router = APIRouter()
 
 @auth_router.post("/auth/login", tags=['auth'], response_model=dict, status_code=200)
 async def login(userData: UserLogin):
-
     async with async_session() as db:
         response = await UserService(db).token(userData)
     
