@@ -16,3 +16,10 @@ RUN on
 #Endpoints:
 
 
+
+#Migrations update ( alembic ):
+alembic revision --autogenerate -m "Description changes "
+
+
+apply changes:
+alembic upgrade head

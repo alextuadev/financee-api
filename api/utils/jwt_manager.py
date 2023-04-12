@@ -38,10 +38,12 @@ def decode_access_token(token: str):
     return username
 
 # Define a function to verify access tokens
-def verify_access_token(token: str):
+def verify_access_token(token: str, request):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username = payload.get("username")
+        request.state.user_id = payload.get("user_id")  # Agrega el ID del usuario al objeto de solicitud
+    
         if username is None:
             raise HTTPException(status_code=401, detail="Invalid token")
     except JWTError:

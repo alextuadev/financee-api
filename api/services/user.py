@@ -58,7 +58,7 @@ class UserService():
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Invalid username or password 404")
         
         if pwd_context.verify(user.password, existing_user.password):
-            token = jwt.encode({"username": user.email}, JWT_SECRET, algorithm=JWT_ALGORITHM)
+            token = jwt.encode({"user_id": existing_user.id, "username": existing_user.email}, JWT_SECRET, algorithm=JWT_ALGORITHM)
             
             # Convert the existing_user object to a dictionary and remove the 'password' key
             user_data = existing_user.__dict__.copy()

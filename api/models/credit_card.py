@@ -1,15 +1,23 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, Enum as SQLAlchemyEnum
+from sqlalchemy import Column, ForeignKey, Integer, String, Date
 from sqlalchemy.orm import relationship
 from config.database import Base
 from models.user import User
-from enum import Enum
-
 
 class CreditCard(Base):
     __tablename__ = 'credit_cards'
-    id = Column(Integer, primary_key=True)
-    card_number = Column(String)
-    
-    expiration_date = Column(String)
+
+    id = Column(Integer, primary_key=True, index=True)
+    card_number = Column(String(16), unique=True, index=True)
+    cardholder_name = Column(String(150))
+    expiry_date = Column(Date)
+    category_card = Column(String(150), nullable=True)
+    card_type = Column(String(20), nullable=True)
+    payment_due_date = Column(Date, nullable=True)
+    statement_date = Column(Date, nullable=True)
+    is_active = Column(Integer, default=1)
+    is_owner = Column(Integer, default=1)
     user_id = Column(Integer, ForeignKey('users.id'))
+    bank_id = Column(Integer, ForeignKey('banks.id'))
+
     user = relationship("User", back_populates="credit_cards")
+
