@@ -1,7 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Integer, String, Date
 from sqlalchemy.orm import relationship
 from config.database import Base
-from models.user import User
+
 
 class CreditCard(Base):
     __tablename__ = 'credit_cards'
@@ -20,4 +20,5 @@ class CreditCard(Base):
     bank_id = Column(Integer, ForeignKey('banks.id'))
 
     user = relationship("User", back_populates="credit_cards")
+    bank = relationship("Bank", back_populates="credit_cards")
 

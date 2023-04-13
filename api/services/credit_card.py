@@ -4,22 +4,22 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from schemas.credit_card import CreditCard
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import select, update, delete
-
+from sqlalchemy.orm import joinedload
 
 class CreditCardService:
     
     def __init__(self, db: AsyncSession) -> None:
         self.db = db
 
-    async def get_credit_cards(self, user_id: int):
-        stmt = select(CreditCardModel).where(CreditCardModel.user_id == user_id)
+    async def get_credit_cards(self, user_id: int):        
+        stmt = select(CreditCardModel).where(CreditCardModel.user_id == user_id).options(joinedload(CreditCardModel.bank))
         result = await self.db.execute(stmt)
         credit_cards = result.scalars().all()
         return credit_cards
     
 
     async def get_credit_card(self, credit_card_id: int, user_id: int):
-        stmt = select(CreditCardModel).where(CreditCardModel.id == credit_card_id, CreditCardModel.user_id == user_id)
+        stmt = select(CreditCardModel).where(CreditCardModel.id == credit_card_id, CreditCardModel.user_id == user_id).options(joinedload(CreditCardModel.bank))
         result = await self.db.execute(stmt)
         credit_card = result.scalar()
         if credit_card is None:

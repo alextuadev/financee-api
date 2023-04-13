@@ -11,6 +11,7 @@ class CreditCard(BaseModel):
     expiry_date: date
     payment_due_date: Optional[date] = None
     statement_date: Optional[date] = None
+    bank_id: int
     is_active: bool
     is_owner: bool
 
@@ -24,6 +25,7 @@ class CreditCard(BaseModel):
                 "expiry_date": "2025-12-31",
                 "payment_due_date": "2023-05-15",
                 "statement_date": "2023-05-01",
+                "bank_id": 1,
                 "is_active": True,
                 "is_owner": True
             }
