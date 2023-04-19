@@ -16,7 +16,7 @@ class DebtService:
         self.db.add(new_debt)
         await self.db.commit()
 
-        return new_debt.id
+        return new_debt
 
     async def get_debts(self, user_id: int):
         stmt = select(DebtModel).options(joinedload(DebtModel.debt_type)).where(DebtModel.user_id == user_id)

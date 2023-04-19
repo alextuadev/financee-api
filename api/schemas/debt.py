@@ -13,7 +13,6 @@ class Debt(BaseModel):
     estimated_end_date: date
     reason: str
     bank_id: Optional[int]
-    user_id: int
     debt_type_id: int
 
     class Config:
@@ -22,6 +21,7 @@ class Debt(BaseModel):
                 "to_whom": "John Doe",
                 "description": "Personal loan",
                 "initial_amount": 10000,
+                "current_amount_due": 9500,
                 "initial_amount": 5000,
                 "monthly_payment": 350,
                 "interest_type": "saldos",

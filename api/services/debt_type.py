@@ -14,13 +14,13 @@ class DebtTypeService:
         self.db.add(new_debt_type)
         await self.db.commit()
         await self.db.refresh(new_debt_type)
+        
         return new_debt_type
 
     async def get_debt_types(self):
         stmt = select(DebtTypeModel)
         result = await self.db.execute(stmt)
-        debt_types = result.scalars().all()
-        return debt_types
+        return result.scalars().all()
 
     async def get_debt_type(self, id: int):
         stmt = select(DebtTypeModel).where(DebtTypeModel.id == id)
