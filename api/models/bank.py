@@ -12,3 +12,4 @@ class Bank(Base):
 
     bank_accounts = relationship("BankAccount", back_populates="bank")
     credit_cards = relationship("CreditCard", back_populates="bank")
+    debts = relationship("Debt", back_populates="bank")

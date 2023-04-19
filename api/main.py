@@ -6,6 +6,7 @@ from routers.bank import bank_router
 from routers.auth import auth_router
 from routers.bank_account import bank_account_router
 from routers.credit_card import credit_card_router
+from routers.debt import debt_router
 
 
 app = FastAPI()
@@ -16,6 +17,7 @@ app.include_router(auth_router, prefix="/api")
 app.include_router(bank_router, prefix="/api")
 app.include_router(bank_account_router, prefix="/api")
 app.include_router(credit_card_router, prefix="/api")
+app.include_router(debt_router, prefix="/api")
 # app.include_router(transaction_router, prefix="/api")
 
 async def create_tables():
